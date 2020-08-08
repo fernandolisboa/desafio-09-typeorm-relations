@@ -19,14 +19,18 @@ class OrdersProducts {
   @Column()
   product_id: string;
 
-  @ManyToOne(() => Product)
+  @ManyToOne(_ => Product, product => product.order_products, {
+    cascade: ['insert', 'update'],
+  })
   @JoinColumn({ name: 'product_id' })
   product: Product;
 
   @Column()
   order_id: string;
 
-  @ManyToOne(() => Order)
+  @ManyToOne(_ => Order, order => order.order_products, {
+    cascade: ['insert', 'update'],
+  })
   @JoinColumn({ name: 'order_id' })
   order: Order;
 
